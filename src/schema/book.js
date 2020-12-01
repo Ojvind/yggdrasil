@@ -20,6 +20,10 @@ export default gql`
       yearRead: String!,
       yearPublished: String
     ): Book!
+
+    deleteBook(
+      id: ID!
+    ): Boolean
   }
 
   type BookConnection {

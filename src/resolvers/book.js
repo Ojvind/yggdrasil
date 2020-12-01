@@ -107,20 +107,20 @@ export default {
       },
     ),
 
-    // deleteBook: combineResolvers(
-    //   isAuthenticated,
-    //   isBookOwner,
-    //   async (parent, { id }, { models }) => {
-    //     const book = await models.Book.findById(id);
+    deleteBook: combineResolvers(
+      // isAuthenticated,
+      // isBookOwner,
+      async (parent, { id }, { models }) => {
+        const book = await models.Book.findById(id);
 
-    //     if (book) {
-    //       await book.remove();
-    //       return true;
-    //     } else {
-    //       return false;
-    //     }
-    //   },
-    // ),
+        if (book) {
+          await book.remove();
+          return true;
+        } else {
+          return false;
+        }
+      },
+    ),
   },
 
   Book: {
