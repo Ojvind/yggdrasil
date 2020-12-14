@@ -44,8 +44,19 @@ export default {
         },
       );
 
+      const zeroBooks = books.length === 0;
       const hasNextPage = books.length > limit;
       const edges = hasNextPage ? books.slice(0, -1) : books;
+
+      if (zeroBooks) {
+        return {
+          edges,
+          pageInfo: {
+            hasNextPage,
+            endCursor: ""
+          }
+        }
+      }  
 
       return {
         edges,
