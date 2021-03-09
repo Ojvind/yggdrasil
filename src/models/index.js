@@ -7,23 +7,18 @@ import Book from './book';
 const connectDb = () => {
   mongoose.set('useCreateIndex', true);
   console.log('------------------------------------');
-  console.log('Connecting to Database...', process.env.TEST_DATABASE_URL);
-  if (process.env.TEST_DATABASE_URL) {
-    console.log('...', process.env.TEST_DATABASE_URL);
-    console.log(' { useNewUrlParser: true },{ useFindAndModify: false }')
-    console.log('------------------------------------');
+  console.log('Connecting to Database...', process.env.DEV_DATABASE_URL);
+  if (process.env.DEV_DATABASE_URL && process.env.REACT_APP_ENV === "dev") {
     return mongoose.connect(
-      process.env.TEST_DATABASE_URL, { 
+      process.env.DEV_DATABASE_URL, { 
         useNewUrlParser: true,
-        // useFindAndModify: false 
+        useFindAndModify: false,
+        useUnifiedTopology: true,
       },
     );
   }
 
-  if (process.env.DATABASE_URL) {
-    console.log('...', process.env.DATABASE_URL);
-    console.log(' { useNewUrlParser: true },{ useFindAndModify: false }')
-    console.log('------------------------------------');
+  if (process.env.DATABASE_URL && process.env.REACT_APP_ENV === "production") {
     return mongoose.connect(
       process.env.DATABASE_URL, { 
         useNewUrlParser: true,
@@ -32,6 +27,7 @@ const connectDb = () => {
       },
     );
   }
+  console.log('------------------------------------');
 };
 
 const models = { User, Writer, Book };

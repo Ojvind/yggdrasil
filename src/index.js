@@ -90,20 +90,15 @@ server.applyMiddleware({ app, path: '/graphql' });
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
-const isTest = !!process.env.TEST_DATABASE_URL;
-const isProduction = process.env.NODE_ENV === 'production';
+const isDev = process.env.REACT_APP_ENV === 'dev';
 const port = process.env.PORT || 8000;
 
 connectDb().then(async () => {
-  console.log('isTest', isTest);
-  console.log('isProduction', isProduction);
-  console.log('port', port);
-  let clean = true;
-  if (clean || isTest || isProduction) {
+  console.log('isDev', isDev);
+  if (isDev) {
     console.log('------------------------------------');
     console.log('Rensar Users, Writers and Books samt skapar nya...');
     console.log('------------------------------------');
-    // reset database
     await Promise.all([
       models.User.deleteMany({}),
       models.Writer.deleteMany({}),
@@ -114,7 +109,7 @@ connectDb().then(async () => {
   }
 
   httpServer.listen({ port }, () => {
-    console.log(`Apollooooooxxxoooooooo Server on http://localhost:${port}/graphql`);
+    console.log(`Apollo Server on http://localhost:${port}/graphql`);
   });
 });
 

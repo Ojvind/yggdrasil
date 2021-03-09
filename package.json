@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start-dev": "REACT_APP_ENV=dev nodemon --exec babel-node src/index.js",
+    "start-prod": "REACT_APP_ENV=production nodemon --exec babel-node src/index.js",
     "test:run-server": "TEST_DATABASE_URL=mongodb://localhost:27017/test npm start",
     "test:execute-test": "TEST_DATABASE_URL=mongodb://localhost:27017/test mocha --require @babel/register 'src/**/*.spec.js'",
     "test": "mocha --require @babel/register 'src/**/*.spec.js'"
