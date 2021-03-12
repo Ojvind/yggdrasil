@@ -7,7 +7,13 @@ import Book from './book';
 const connectDb = () => {
   mongoose.set('useCreateIndex', true);
   console.log('------------------------------------');
-  console.log('Connecting to Database...', process.env.DEV_DATABASE_URL);
+  if (process.env.REACT_APP_ENV === "dev") {
+    console.log('Connecting to Database...', process.env.DEV_DATABASE_URL);
+  }
+  else if (process.env.REACT_APP_ENV === "production") {
+    console.log('Connecting to Database...', process.env.DATABASE_URL);
+  }
+
   if (process.env.DEV_DATABASE_URL && process.env.REACT_APP_ENV === "dev") {
     return mongoose.connect(
       process.env.DEV_DATABASE_URL, { 
