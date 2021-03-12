@@ -78,19 +78,24 @@ export default {
       },
     ),
 
-    // deleteWriter: combineResolvers(
-    //   isAdmin,
-    //   async (parent, { id }, { models }) => {
-    //     const writer = await models.Writer.findById(id);
-
-    //     if (writer) {
-    //       await writer.remove();
-    //       return true;
-    //     } else {
-    //       return false;
-    //     }
-    //   },
-    // ),
+    deleteWriter: combineResolvers(
+      // isAdmin,
+      async (parent, { id }, { models }) => {
+        const writer = await models.Writer.findById(id);
+        if (writer) {
+          const books = await models.Book.find({ writerId: writer.id});
+          if (books) {
+            for (var i = 0; i < books.length; i++) {
+              await books[i].remove();
+            }
+          }
+          await writer.remove();
+          return true;
+        } else {
+          return false;
+        }
+      },
+    ),
   },
   Writer: {
     books: async (writer, args, { models }) => {

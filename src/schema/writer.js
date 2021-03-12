@@ -14,6 +14,7 @@ export default gql`
       surname: String!, 
       homepage: String
     ): Writer!
+    deleteWriter(id: ID!): Boolean!
   }
   
   type WriterConnection {
@@ -29,7 +30,3 @@ export default gql`
     books: [Book!]
   }
 `;
-
-// extend type Mutation {
-//   deleteWriter(id: ID!): Boolean!
-// }

@@ -46,12 +46,6 @@ export default gql`
   }
 `;
 
-
-// extend type Mutation {
-//   createBook(text: String!): Book!
-//   deleteBook(id: ID!): Boolean!
-// }
-
 // extend type Subscription {
 //   bookCreated: BookCreated!
 // }
