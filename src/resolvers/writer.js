@@ -24,8 +24,19 @@ export default {
       },
       );
 
+      const zeroWriters = writer.length === 0;
       const hasNextPage = writer.length > limit;
       const edges = hasNextPage ? writer.slice(0, -1) : writer;
+
+      if (zeroWriters) {
+        return {
+          edges,
+          pageInfo: {
+            hasNextPage,
+            endCursor: ""
+          }
+        }
+      } 
 
       return {
         edges,
