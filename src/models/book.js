@@ -6,6 +6,11 @@ const bookSchema = new mongoose.Schema({
           unique: true,
           required: true,
       },
+      url: {
+        type: String,
+        unique: false,
+        required: false,
+      },
       yearPublished: {
           type: String,
           unique: false,

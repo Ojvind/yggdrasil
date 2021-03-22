@@ -150,6 +150,7 @@ const createInitData = async date => {
 
   const book1 = new models.Book({
     title: 'The 4-Hour Body',
+    url: 'https://fourhourbody.com/',
     yearPublished: '2010',
     yearRead: '2017',
     createdAt: date.setSeconds(date.getSeconds() + 1),
@@ -158,6 +159,7 @@ const createInitData = async date => {
 
   const book2 = new models.Book({
     title: 'The 4-Hour Workweek',
+    url: 'https://fourhourworkweek.com/',
     yearPublished: '2007',
     yearRead: '2016',
     createdAt: date.setSeconds(date.getSeconds() + 1),
@@ -166,6 +168,7 @@ const createInitData = async date => {
 
   const book3 = new models.Book({
     title: 'Essentialism: The Disciplined Pursuit of Less',
+    url: 'https://gregmckeown.com/books/essentialism/',
     yearPublished: '2014',
     yearRead: '2019',
     createdAt: date.setSeconds(date.getSeconds() + 1),
@@ -174,6 +177,7 @@ const createInitData = async date => {
 
   const book4 = new models.Book({
     title: 'LAZARUS',
+    url: 'https://larskepler.com/books/lazarus/',
     yearPublished: '2019',
     yearRead: '2019',
     createdAt: date.setSeconds(date.getSeconds() + 1),

@@ -8,17 +8,19 @@ export default gql`
 
   extend type Mutation {
     createBook(
-      title: String!,
-      yearRead: String!,
       writerId: ID!,
-      yearPublished: String
+      title: String!,
+      url: String,
+      yearPublished: String,
+      yearRead: String!,
     ): Book!
 
     updateBook(
       id: ID!,
       title: String!,
+      url: String,
       yearRead: String!,
-      yearPublished: String
+      yearPublished: String,
     ): Book!
 
     deleteBook(
@@ -39,8 +41,9 @@ export default gql`
   type Book {
     id: ID!
     title: String!
-    yearPublished: String
+    url: String
     yearRead: String!
+    yearPublished: String
     createdAt: Date!
     writer: Writer!
   }
