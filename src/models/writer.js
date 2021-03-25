@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 import isURL from 'validator/lib/isURL';
 
 const writerSchema = new mongoose.Schema({

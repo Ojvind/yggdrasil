@@ -1,25 +1,27 @@
 import mongoose from 'mongoose';
+import isURL from 'validator/lib/isURL';
 
 const bookSchema = new mongoose.Schema({
       title: {
-          type: String,
-          unique: true,
-          required: true,
+        type: String,
+        unique: true,
+        required: true,
       },
       url: {
         type: String,
         unique: false,
         required: false,
+        validate: [isURL, 'No valid web address provided.'],
       },
       yearPublished: {
-          type: String,
-          unique: false,
-          required: false,
+        type: String,
+        unique: false,
+        required: false,
       },
       yearRead: {
-          type: String,
-          unique: false,
-          required: true,
+        type: String,
+        unique: false,
+        required: true,
       },
       writerId: {
         type: mongoose.Schema.Types.ObjectId
