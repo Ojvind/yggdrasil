@@ -19,8 +19,8 @@ export default gql`
       id: ID!,
       title: String!,
       url: String,
-      yearRead: String!,
       yearPublished: String,
+      yearRead: String!,
     ): Book!
 
     deleteBook(
@@ -42,8 +42,8 @@ export default gql`
     id: ID!
     title: String!
     url: String
-    yearRead: String!
     yearPublished: String
+    yearRead: String!
     createdAt: Date!
     writer: Writer!
   }

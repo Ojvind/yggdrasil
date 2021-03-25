@@ -100,11 +100,13 @@ export default {
       async (parent, {
         id,
         title,
+        url,
         yearRead,
         yearPublished
       }, { models }) => {
         let props = {
           title,
+          url,
           yearRead,
           yearPublished,
         };
