@@ -35,7 +35,7 @@
     "graphql-iso-date": "^3.6.1",
     "graphql-resolvers": "^0.3.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.9",
+    "mongoose": "^5.12.10",
     "morgan": "^1.9.1",
     "uuid": "^3.3.2",
     "validator": "^11.1.0"
