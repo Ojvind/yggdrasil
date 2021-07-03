@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import cors from 'cors';
 import morgan from 'morgan';
 import http from 'http';

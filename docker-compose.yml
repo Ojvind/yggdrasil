@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+    app:
+        build: .
+        command: sh -c "yarn install && yarn run start-dev"
+        ports:
+            - 8000:8000
+        working_dir: /app
+        volumes: 
+            - ./:/app
+
+    mongodb:
+        image: mongo
+        volumes:
+            - mongo-data:/var/lib/mongodb
+        ports:
+          - 9999:27017
+  
+volumes:
+  mongo-data:
