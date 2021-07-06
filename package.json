@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "REACT_APP_ENV=dev nodemon --exec babel-node src/index.js",
+    "start-dev": "REACT_APP_ENV=dev DEV_DATABASE_URL=mongodb://mongo:27017/writers-dev nodemon --exec babel-node src/index.js",
     "start-prod": "REACT_APP_ENV=production nodemon --exec babel-node src/index.js",
-    "test:run-server": "TEST_DATABASE_URL=mongodb://localhost:27017/test npm start",
-    "test:execute-test": "TEST_DATABASE_URL=mongodb://localhost:27017/test mocha --require @babel/register 'src/**/*.spec.js'",
+    "test:run-server": "TEST_DATABASE_URL=mongodb://mongodb:27017/test npm start",
+    "test:execute-test": "TEST_DATABASE_URL=mongodb://mongodb:27017/test mocha --require @babel/register 'src/**/*.spec.js'",
     "test": "mocha --require @babel/register 'src/**/*.spec.js'"
   },
   "keywords": [],
@@ -26,16 +26,15 @@
   "dependencies": {
     "apollo-server": "^2.7.0",
     "apollo-server-express": "^2.7.0",
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dataloader": "^1.4.0",
-    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "graphql": "^14.4.2",
     "graphql-iso-date": "^3.6.1",
     "graphql-resolvers": "^0.3.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.9",
+    "mongoose": "^5.12.10",
     "morgan": "^1.9.1",
     "uuid": "^3.3.2",
     "validator": "^11.1.0"
