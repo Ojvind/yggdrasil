@@ -3,8 +3,9 @@ import { gql } from 'apollo-server-express';
 export default gql`
   extend type Query {
     books(writerId: ID, cursor: String, limit: Int): BookConnection!
-    book(id: ID!): Book!
+    book(bookId: ID!): Book!
   }
+  
 
   extend type Mutation {
     createBook(

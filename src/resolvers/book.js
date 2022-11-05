@@ -68,8 +68,8 @@ export default {
         },
       };
     },
-    book: async (parent, { id }, { models }) => {
-      return await models.Book.findById(id);
+    book: async (parent, { bookId }, { models }) => {
+      return await models.Book.findById(bookId);
     },
   },
 

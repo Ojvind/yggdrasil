@@ -6,6 +6,7 @@
   "scripts": {
     "start-dev-mongo-vagrant": "REACT_APP_ENV=dev DEV_DATABASE_URL=mongodb://localhost:9999/writers-dev nodemon --exec babel-node src/index.js",
     "start-dev-mongo-docker": "REACT_APP_ENV=dev DEV_DATABASE_URL=mongodb://mongo:27017/writers-dev nodemon --exec babel-node src/index.js",
+    "start-dev-mongo-local": "REACT_APP_ENV=dev DEV_DATABASE_URL=mongodb://127.0.0.1:27017/writers-dev nodemon --exec babel-node src/index.js",
     "start-prod": "REACT_APP_ENV=production nodemon --exec babel-node src/index.js",
     "test:run-server": "TEST_DATABASE_URL=mongodb://mongodb:27017/test npm start",
     "test:execute-test": "TEST_DATABASE_URL=mongodb://mongodb:27017/test mocha --require @babel/register 'src/**/*.spec.js'",
