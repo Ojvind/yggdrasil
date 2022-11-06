@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+    app:
+        restart: always
+        build: .
+        ports:
+            - 8000:8000
+        command: sh -c "yarn install && yarn run start-prod-mongo-docker"
+        volumes: 
+            - ./:/app
+    mongo:
+        image: mongo
+        ports:
+            - 27017:27017
+        volumes:
+            - mongodb:/data/db            
+volumes:
+    mongodb:
+               
