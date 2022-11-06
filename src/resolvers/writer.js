@@ -55,30 +55,38 @@ export default {
 
   Mutation: {
     createWriter: combineResolvers(
-      async(parent, { name, surname, homepage }, { models }) => {
+      async(parent, { name, surname, homepage, nationality }, { models }) => {
         return await models.Writer.create(
-          { name, surname, homepage },
+          { name, surname, homepage, nationality },
         );
       },
     ),
 
     updateWriter: combineResolvers(
 //      isAuthenticated,
-      async (parent, { id, name, surname, homepage }, { models }) => {
+      async (parent, { id, name, surname, homepage, nationality }, { models }) => {
         let props = {};
-        if (homepage) {
+        if (homepage && nationality) {
+          props = {
+            name,
+            surname,
+            homepage,
+            nationality,
+          }
+        } else if (homepage && !nationality) {
           props = {
             name,
             surname,
             homepage,
           }
-        } else {
+        } else if (!homepage && nationality) {
           props = {
             name,
             surname,
+            nationality,
           }
         }
-        return await models.Writer.findByIdAndUpdate(
+      return await models.Writer.findByIdAndUpdate(
           id,
           props,
           { 
