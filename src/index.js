@@ -155,6 +155,7 @@ const createInitData = async date => {
     url: 'https://fourhourbody.com/',
     yearPublished: '2010',
     yearRead: '2017',
+    descritpion: 'What ever...',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     writerId: writer1.id,
   });
@@ -164,6 +165,7 @@ const createInitData = async date => {
     url: 'https://fourhourworkweek.com/',
     yearPublished: '2007',
     yearRead: '2016',
+    descritpion: 'What ever...igen!',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     writerId: writer1.id,
   })
@@ -173,6 +175,7 @@ const createInitData = async date => {
     url: 'https://gregmckeown.com/books/essentialism/',
     yearPublished: '2014',
     yearRead: '2019',
+    descritpion: 'What ever...ännu en gång',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     writerId: writer2.id,
   });
@@ -182,6 +185,7 @@ const createInitData = async date => {
     url: 'https://larskepler.com/books/lazarus/',
     yearPublished: '2019',
     yearRead: '2019',
+    descritpion: 'What ever...one last time (?)',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     writerId: writer3.id,
   });

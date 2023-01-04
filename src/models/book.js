@@ -23,6 +23,11 @@ const bookSchema = new mongoose.Schema({
         unique: false,
         required: true,
       },
+      description: {
+        type: String,
+        unique: false,
+        required: false,
+      },
       writerId: {
         type: mongoose.Schema.Types.ObjectId
       },

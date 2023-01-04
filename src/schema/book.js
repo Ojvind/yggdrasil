@@ -6,7 +6,6 @@ export default gql`
     book(bookId: ID!): Book!
   }
   
-
   extend type Mutation {
     createBook(
       writerId: ID!,
@@ -14,6 +13,7 @@ export default gql`
       url: String,
       yearPublished: String,
       yearRead: String!,
+      description: String,
     ): Book!
 
     updateBook(
@@ -22,6 +22,7 @@ export default gql`
       url: String,
       yearPublished: String,
       yearRead: String!,
+      description: String,
     ): Book!
 
     deleteBook(
@@ -45,6 +46,7 @@ export default gql`
     url: String
     yearPublished: String
     yearRead: String!
+    description: String
     createdAt: Date!
     writer: Writer!
   }
