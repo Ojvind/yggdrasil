@@ -96,7 +96,7 @@ connectDb().then(async () => {
   console.log('isDev', isDev);
   if (isDev) {
     console.log('------------------------------------');
-    console.log('Rensar Users, Writers and Books samt skapar nya...');
+    console.log('Rensar Useeeeeeeers, Writers and Books samt skapar nya...');
     console.log('------------------------------------');
     await Promise.all([
       models.User.deleteMany({}),
@@ -151,11 +151,11 @@ const createInitData = async date => {
   });
 
   const book1 = new models.Book({
-    title: 'The 4-Hour Body',
+    title: 'The 4-Hour Bodyyyyyyy',
     url: 'https://fourhourbody.com/',
     yearPublished: '2010',
     yearRead: '2017',
-    descritpion: 'What ever...',
+    description: 'What ever...',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     writerId: writer1.id,
   });
@@ -165,7 +165,7 @@ const createInitData = async date => {
     url: 'https://fourhourworkweek.com/',
     yearPublished: '2007',
     yearRead: '2016',
-    descritpion: 'What ever...igen!',
+    description: 'What ever...igen!',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     writerId: writer1.id,
   })
@@ -175,7 +175,7 @@ const createInitData = async date => {
     url: 'https://gregmckeown.com/books/essentialism/',
     yearPublished: '2014',
     yearRead: '2019',
-    descritpion: 'What ever...ännu en gång',
+    description: 'What ever...ännu en gång',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     writerId: writer2.id,
   });
@@ -185,7 +185,7 @@ const createInitData = async date => {
     url: 'https://larskepler.com/books/lazarus/',
     yearPublished: '2019',
     yearRead: '2019',
-    descritpion: 'What ever...one last time (?)',
+    description: 'What ever...one last time (?)',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     writerId: writer3.id,
   });
