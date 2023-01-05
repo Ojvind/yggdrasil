@@ -130,7 +130,7 @@ const createInitData = async date => {
     name: 'Tim',
     surname: 'Ferris',
     homepage: 'https://tim.blog/',
-    nationality: 'Amerikan',
+    nationality: 'US',
     createdAt: date.setSeconds(date.getSeconds() + 1),
   });
 
@@ -138,7 +138,7 @@ const createInitData = async date => {
     name: 'Greg',
     surname: 'McKeown',
     homepage: 'https://gregmckeown.com/',
-    nationality: 'Engelsman',
+    nationality: 'GB',
     createdAt: date.setSeconds(date.getSeconds() + 1),
   });
 
@@ -146,7 +146,7 @@ const createInitData = async date => {
     name: 'Lars',
     surname: 'Kepler',
     homepage: 'http://larskepler.com/',
-    nationality: 'Svensk',
+    nationality: 'SE',
     createdAt: date.setSeconds(date.getSeconds() + 1),
   });
 
