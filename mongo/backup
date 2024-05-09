@@ -1,0 +1,6 @@
+To backup all databases:
+docker exec yggdrasil-mongo-1 sh -c 'mongodump --archive' > db.dump
+
+To resore everything from db.dump:
+docker exec -i yggdrasil-mongo-1 sh -c 'mongorestore --archive' < db.dump
+
