@@ -76,13 +76,14 @@ export default {
   Mutation: {
     createBook: combineResolvers(
 //      isAuthenticated,
-      async (parent, {writerId, title, url, yearPublished, yearRead}, { models, me }) => {
+      async (parent, {writerId, title, url, yearPublished, yearRead, description}, { models, me }) => {
         const book = await models.Book.create({
           writerId,
           title,
           url,
           yearPublished,
           yearRead,
+          description,
         });
 
         // pubsub.publish(EVENTS.BOOK.CREATED, {
@@ -102,13 +103,15 @@ export default {
         title,
         url,
         yearRead,
-        yearPublished
+        yearPublished,
+        description,
       }, { models }) => {
         let props = {
           title,
           url,
           yearRead,
           yearPublished,
+          description,
         };
         return await models.Book.findByIdAndUpdate(
           id,
