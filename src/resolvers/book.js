@@ -12,12 +12,51 @@ String.prototype.toObjectId = function() {
 //console.log('545f489dea12346454ae793b'.toObjectId());
 
 const toCursorHash = string => Buffer.from(string).toString('base64');
-
-const fromCursorHash = string =>
-  Buffer.from(string, 'base64').toString('ascii');
+const fromCursorHash = string => Buffer.from(string, 'base64').toString('ascii');
 
 export default {
   Query: {
+    allBooks: async (parent, {cursor, limit = 100 }, { models }) => {
+      const cursorOptions = cursor
+        ? {
+            createdAt: {
+              $lt: fromCursorHash(cursor),
+            },
+          }
+        : {};
+      const books = await models.Book.find(
+        cursorOptions,
+        null,
+        {
+          sort: { createdAt: -1 },
+          limit: limit + 1,
+        },
+      );
+
+      const zeroBooks = books.length === 0;
+      const hasNextPage = books.length > limit;
+      const edges = hasNextPage ? books.slice(0, -1) : books;
+
+      if (zeroBooks) {
+        return {
+          edges,
+          pageInfo: {
+            hasNextPage,
+            endCursor: ""
+          }
+        }
+      }  
+
+      return {
+        edges,
+        pageInfo: {
+          hasNextPage,
+          endCursor: toCursorHash(
+            edges[edges.length - 1].createdAt.toString(),
+          ),
+        },
+      };
+    },
     books: async (parent, { writerId, cursor, limit = 100 }, { models }) => {
       const cursorOptions = cursor
         ? {
@@ -25,8 +64,7 @@ export default {
               $lt: fromCursorHash(cursor),
             },
           }
-        : {
-        };
+        : {};
       const filterOnWriter = writerId
         ? {
             ...cursorOptions,

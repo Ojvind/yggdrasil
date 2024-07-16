@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
+    allBooks(cursor: String, limit: Int): BookConnection!
     books(writerId: ID, cursor: String, limit: Int): BookConnection!
     book(bookId: ID!): Book!
   }
