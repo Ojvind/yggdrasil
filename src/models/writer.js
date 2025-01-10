@@ -22,7 +22,6 @@ const writerSchema = new mongoose.Schema({
       type: String,
       unique: false,
       required: false,
-      validate: [isURL, 'No valid web address provided.'],
     },
     nationality: {
       type: String,
