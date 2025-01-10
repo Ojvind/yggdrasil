@@ -7,12 +7,18 @@ export default gql`
   }
 
   extend type Mutation {
-    createWriter(name: String!, surname: String!, homepage: String, nationality: String): Writer!
+    createWriter(
+      name: String!,
+      surname: String!,
+      homepage: String,
+      portraitimageurl: String,
+      nationality: String): Writer!
     updateWriter(
       id: ID!, 
       name: String!, 
       surname: String!, 
       homepage: String,
+      portraitimageurl: String,
       nationality: String
     ): Writer!
     deleteWriter(id: ID!): Boolean!
@@ -28,6 +34,7 @@ export default gql`
     name: String!
     surname: String!
     homepage: String
+    portraitimageurl: String
     nationality: String
     books: [Book!]
   }
