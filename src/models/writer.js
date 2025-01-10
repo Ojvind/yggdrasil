@@ -18,6 +18,12 @@ const writerSchema = new mongoose.Schema({
       required: false,
       validate: [isURL, 'No valid web address provided.'],
     },
+    portraitimageurl: {
+      type: String,
+      unique: false,
+      required: false,
+      validate: [isURL, 'No valid web address provided.'],
+    },
     nationality: {
       type: String,
       unique: false,

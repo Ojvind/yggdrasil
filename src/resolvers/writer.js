@@ -55,34 +55,62 @@ export default {
 
   Mutation: {
     createWriter: combineResolvers(
-      async(parent, { name, surname, homepage, nationality }, { models }) => {
+      async(parent, { name, surname, homepage, portraitimageurl, nationality }, { models }) => {
         return await models.Writer.create(
-          { name, surname, homepage, nationality },
+          { name, surname, homepage, portraitimageurl, nationality },
         );
       },
     ),
 
     updateWriter: combineResolvers(
 //      isAuthenticated,
-      async (parent, { id, name, surname, homepage, nationality }, { models }) => {
+      async (parent, { id, name, surname, homepage, portraitimageurl, nationality }, { models }) => {
         let props = {};
-        if (homepage && nationality) {
+        if (homepage && portraitimageurl && nationality) {
+          props = {
+            name,
+            surname,
+            homepage,
+            portraitimageurl,
+            nationality,
+          }
+        } else if (homepage && !portraitimageurl && !nationality) {
+          props = {
+            name,
+            surname,
+            homepage,
+          }
+        } else if (!homepage && portraitimageurl && !nationality) {
+          props = {
+            name,
+            surname,
+            portraitimageurl,
+          }
+        } else if (!homepage && !portraitimageurl && nationality) {
+          props = {
+            name,
+            surname,
+            nationality,
+          }
+        } else if (homepage && portraitimageurl && !nationality) {
+          props = {
+            name,
+            surname,
+            homepage,
+            portraitimageurl,
+          }
+        } else if (homepage && !portraitimageurl && nationality) {
           props = {
             name,
             surname,
             homepage,
             nationality,
           }
-        } else if (homepage && !nationality) {
+        } else if (!homepage && portraitimageurl && nationality) {
           props = {
             name,
             surname,
-            homepage,
-          }
-        } else if (!homepage && nationality) {
-          props = {
-            name,
-            surname,
+            portraitimageurl,
             nationality,
           }
         }
