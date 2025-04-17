@@ -28,6 +28,11 @@ const bookSchema = new mongoose.Schema({
         unique: false,
         required: false,
       },
+      portraitimageurl: {
+        type: String,
+        unique: false,
+        required: false,
+      },  
       writerId: {
         type: mongoose.Schema.Types.ObjectId
       },

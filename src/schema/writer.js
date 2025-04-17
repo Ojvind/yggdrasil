@@ -12,7 +12,9 @@ export default gql`
       surname: String!,
       homepage: String,
       portraitimageurl: String,
-      nationality: String): Writer!
+      nationality: String
+    ): Writer!
+
     updateWriter(
       id: ID!, 
       name: String!, 
@@ -21,6 +23,7 @@ export default gql`
       portraitimageurl: String,
       nationality: String
     ): Writer!
+    
     deleteWriter(id: ID!): Boolean!
   }
   
