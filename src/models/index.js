@@ -8,7 +8,7 @@ const connectDb = (url) => {
   const connectionUrl =
     url ||
     (process.env.REACT_APP_ENV === 'dev' && process.env.DEV_DATABASE_URL) ||
-    (process.env.REACT_APP_ENV === 'production' && process.env.DATABASE_URL);
+    (process.env.REACT_APP_ENV === 'production' && process.env.PROD_DATABASE_URL);
 
   console.log('------------------------------------');
   if (process.env.REACT_APP_ENV === 'dev') {

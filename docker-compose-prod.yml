@@ -7,8 +7,10 @@ services:
         ports:
             - 8000:8000
         command: sh -c "yarn install && yarn run start-prod-mongo-docker"
-        volumes: 
+        volumes:
             - ./:/app
+        environment:
+            - SECRET=${SECRET}
     mongo:
         image: mongo
         ports:

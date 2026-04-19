@@ -13,12 +13,18 @@ const createToken = async (user, secret, expiresIn) => {
 
 export default {
   Query: {
-    users: async (parent, args, { models }) => {
-      return await models.User.find();
-    },
-    user: async (parent, { id }, { models }) => {
-      return await models.User.findById(id);
-    },
+    users: combineResolvers(
+      isAuthenticated,
+      async (_parent, _args, { models }) => {
+        return await models.User.find();
+      },
+    ),
+    user: combineResolvers(
+      isAuthenticated,
+      async (_parent, { id }, { models }) => {
+        return await models.User.findById(id);
+      },
+    ),
     me: async (parent, args, { models, me }) => {
       if (!me) {
         return null;
