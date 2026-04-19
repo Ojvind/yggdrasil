@@ -14,6 +14,10 @@ import resolvers from './resolvers';
 import models, { connectDb } from './models';
 import loaders from './loaders';
 
+if (!process.env.SECRET) {
+  throw new Error('Missing required environment variable: SECRET');
+}
+
 const app = express();
 const httpServer = http.createServer(app);
 
