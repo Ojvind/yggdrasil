@@ -28,7 +28,7 @@ const getMe = async req => {
   const token = req.headers['x-token'];
   if (token) {
     try {
-      return await jwt.verify(token, process.env.SECRET);
+      return jwt.verify(token, process.env.SECRET);
     } catch (e) {
       throw new GraphQLError('Your session expired. Sign in again.', {
         extensions: { code: 'UNAUTHENTICATED' },
@@ -38,7 +38,7 @@ const getMe = async req => {
 };
 
 const server = new ApolloServer({
-  introspection: true,
+  introspection: process.env.REACT_APP_ENV === 'dev',
   typeDefs: schema,
   resolvers,
   formatError: (formattedError) => {
