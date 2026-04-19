@@ -4,10 +4,10 @@ import http from 'http';
 import jwt from 'jsonwebtoken';
 import DataLoader from 'dataloader';
 import express from 'express';
-import {
-  ApolloServer,
-  AuthenticationError,
-} from 'apollo-server-express';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@as-integrations/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { GraphQLError } from 'graphql';
 
 import schema from './schema';
 import resolvers from './resolvers';
@@ -15,9 +15,9 @@ import models, { connectDb } from './models';
 import loaders from './loaders';
 
 const app = express();
+const httpServer = http.createServer(app);
 
 app.use(cors());
-
 app.use(morgan('dev'));
 
 const getMe = async req => {
@@ -26,9 +26,9 @@ const getMe = async req => {
     try {
       return await jwt.verify(token, process.env.SECRET);
     } catch (e) {
-      throw new AuthenticationError(
-        'Your session expired. Sign in again.',
-      );
+      throw new GraphQLError('Your session expired. Sign in again.', {
+        extensions: { code: 'UNAUTHENTICATED' },
+      });
     }
   }
 };
@@ -37,62 +37,46 @@ const server = new ApolloServer({
   introspection: true,
   typeDefs: schema,
   resolvers,
-  formatError: error => {
-    // remove the internal sequelize error message
-    // leave only the important validation error
-    const message = error.message
+  formatError: (formattedError) => {
+    const message = formattedError.message
       .replace('SequelizeValidationError: ', '')
       .replace('Validation error: ', '');
 
-    return {
-      ...error,
-      message,
-    };
+    return { ...formattedError, message };
   },
-  context: async ({ req, connection }) => {
-    if (connection) {
-      return {
-        models,
-        loaders: {
-          user: new DataLoader(keys =>
-            loaders.user.batchUsers(keys, models),
-          ),
-          writer: new DataLoader(keys =>
-            loaders.writer.batchWriters(keys, models),
-          ),
-        },
-      };
-    }
-
-    if (req) {
-      const me = await getMe(req);
-
-      return {
-        models,
-        me,
-        secret: process.env.SECRET,
-        loaders: {
-          user: new DataLoader(keys =>
-            loaders.user.batchUsers(keys, models),
-          ),
-          writer: new DataLoader(keys =>
-            loaders.writer.batchWriters(keys, models),
-          ),
-        },
-      };
-    }
-  },
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
-
-server.applyMiddleware({ app, path: '/graphql' });
-
-const httpServer = http.createServer(app);
-server.installSubscriptionHandlers(httpServer);
 
 const isDev = process.env.REACT_APP_ENV === 'dev';
 const port = process.env.PORT || 8000;
 
 connectDb().then(async () => {
+  await server.start();
+
+  app.use(
+    '/graphql',
+    express.json(),
+    expressMiddleware(server, {
+      context: async ({ req }) => {
+        const me = await getMe(req);
+
+        return {
+          models,
+          me,
+          secret: process.env.SECRET,
+          loaders: {
+            user: new DataLoader(keys =>
+              loaders.user.batchUsers(keys, models),
+            ),
+            writer: new DataLoader(keys =>
+              loaders.writer.batchWriters(keys, models),
+            ),
+          },
+        };
+      },
+    }),
+  );
+
   console.log('isDev', isDev);
   if (isDev) {
     console.log('------------------------------------');
@@ -168,7 +152,7 @@ const createInitData = async date => {
     description: 'What ever...igen!',
     createdAt: date.setSeconds(date.getSeconds() + 1),
     writerId: writer1.id,
-  })
+  });
 
   const book3 = new models.Book({
     title: 'Essentialism: The Disciplined Pursuit of Less',

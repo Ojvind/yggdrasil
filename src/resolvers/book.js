@@ -165,7 +165,7 @@ export default {
         const book = await models.Book.findById(id);
 
         if (book) {
-          await book.remove();
+          await book.deleteOne();
           return true;
         } else {
           return false;

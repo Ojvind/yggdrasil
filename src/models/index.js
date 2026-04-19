@@ -4,36 +4,23 @@ import User from './user';
 import Writer from './writer';
 import Book from './book';
 
-const connectDb = () => {
-  mongoose.set('useCreateIndex', true);
+const connectDb = (url) => {
+  const connectionUrl =
+    url ||
+    (process.env.REACT_APP_ENV === 'dev' && process.env.DEV_DATABASE_URL) ||
+    (process.env.REACT_APP_ENV === 'production' && process.env.DATABASE_URL);
+
   console.log('------------------------------------');
-  if (process.env.REACT_APP_ENV === "dev") {
-    console.log('Connecting to Development Database...', process.env.DEV_DATABASE_URL);
-  }
-  else if (process.env.REACT_APP_ENV === "production") {
-    console.log('Connecting to PRODUCTION Database...', process.env.DATABASE_URL);
-  }
-
-  if (process.env.DEV_DATABASE_URL && process.env.REACT_APP_ENV === "dev") {
-    return mongoose.connect(
-      process.env.DEV_DATABASE_URL, { 
-        useNewUrlParser: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true,
-      },
-    );
-  }
-
-  if (process.env.DATABASE_URL && process.env.REACT_APP_ENV === "production") {
-    return mongoose.connect(
-      process.env.DATABASE_URL, { 
-        useNewUrlParser: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true,
-      },
-    );
+  if (process.env.REACT_APP_ENV === 'dev') {
+    console.log('Connecting to Development Database...', connectionUrl);
+  } else if (process.env.REACT_APP_ENV === 'production') {
+    console.log('Connecting to PRODUCTION Database...', connectionUrl);
   }
   console.log('------------------------------------');
+
+  if (connectionUrl) {
+    return mongoose.connect(connectionUrl);
+  }
 };
 
 const models = { User, Writer, Book };

@@ -1,4 +1,4 @@
-import { GraphQLDateTime } from 'graphql-iso-date';
+import { DateTimeResolver as GraphQLDateTime } from 'graphql-scalars';
 
 import userResolvers from './user';
 import writerResolvers from './writer';

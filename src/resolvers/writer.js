@@ -133,10 +133,10 @@ export default {
           const books = await models.Book.find({ writerId: writer.id});
           if (books) {
             for (var i = 0; i < books.length; i++) {
-              await books[i].remove();
+              await books[i].deleteOne();
             }
           }
-          await writer.remove();
+          await writer.deleteOne();
           return true;
         } else {
           return false;

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { combineResolvers } from 'graphql-resolvers';
-import { AuthenticationError, UserInputError } from 'apollo-server';
+import { GraphQLError } from 'graphql';
 
 import { isAdmin, isAuthenticated } from './authorization';
 
@@ -51,15 +51,17 @@ export default {
       const user = await models.User.findByLogin(login);
 
       if (!user) {
-        throw new UserInputError(
-          'No user found with this login credentials.',
-        );
+        throw new GraphQLError('No user found with this login credentials.', {
+          extensions: { code: 'BAD_USER_INPUT' },
+        });
       }
 
       const isValid = await user.validatePassword(password);
 
       if (!isValid) {
-        throw new AuthenticationError('Invalid password.');
+        throw new GraphQLError('Invalid password.', {
+          extensions: { code: 'UNAUTHENTICATED' },
+        });
       }
 
       return { token: createToken(user, secret, '30m') };
@@ -82,7 +84,7 @@ export default {
         const user = await models.User.findById(id);
 
         if (user) {
-          await user.remove();
+          await user.deleteOne();
           return true;
         } else {
           return false;

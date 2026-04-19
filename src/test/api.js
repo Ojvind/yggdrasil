@@ -156,3 +156,172 @@ export const messagesInclUsers = async () =>
     }
   `,
   });
+
+export const writer = async variables =>
+  axios.post(API_URL, {
+    query: `
+      query ($id: ID!) {
+        writer(id: $id) {
+          id
+          name
+          surname
+          homepage
+          nationality
+        }
+      }
+    `,
+    variables,
+  });
+
+export const writers = async () =>
+  axios.post(API_URL, {
+    query: `
+      {
+        writers {
+          edges {
+            id
+            name
+            surname
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }
+    `,
+  });
+
+export const createWriter = async variables =>
+  axios.post(API_URL, {
+    query: `
+      mutation ($name: String!, $surname: String!, $homepage: String, $nationality: String) {
+        createWriter(name: $name, surname: $surname, homepage: $homepage, nationality: $nationality) {
+          id
+          name
+          surname
+          homepage
+          nationality
+        }
+      }
+    `,
+    variables,
+  });
+
+export const updateWriter = async variables =>
+  axios.post(API_URL, {
+    query: `
+      mutation ($id: ID!, $name: String!, $surname: String!, $homepage: String, $nationality: String) {
+        updateWriter(id: $id, name: $name, surname: $surname, homepage: $homepage, nationality: $nationality) {
+          id
+          name
+          surname
+          homepage
+          nationality
+        }
+      }
+    `,
+    variables,
+  });
+
+export const deleteWriter = async variables =>
+  axios.post(API_URL, {
+    query: `
+      mutation ($id: ID!) {
+        deleteWriter(id: $id)
+      }
+    `,
+    variables,
+  });
+
+export const book = async variables =>
+  axios.post(API_URL, {
+    query: `
+      query ($bookId: ID!) {
+        book(bookId: $bookId) {
+          id
+          title
+          yearRead
+          yearPublished
+        }
+      }
+    `,
+    variables,
+  });
+
+export const allBooks = async () =>
+  axios.post(API_URL, {
+    query: `
+      {
+        allBooks {
+          edges {
+            id
+            title
+            yearRead
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }
+    `,
+  });
+
+export const books = async variables =>
+  axios.post(API_URL, {
+    query: `
+      query ($writerId: ID) {
+        books(writerId: $writerId) {
+          edges {
+            id
+            title
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }
+    `,
+    variables,
+  });
+
+export const createBook = async variables =>
+  axios.post(API_URL, {
+    query: `
+      mutation ($writerId: ID!, $title: String!, $yearRead: String!, $yearPublished: String, $url: String, $description: String) {
+        createBook(writerId: $writerId, title: $title, yearRead: $yearRead, yearPublished: $yearPublished, url: $url, description: $description) {
+          id
+          title
+          yearRead
+          yearPublished
+        }
+      }
+    `,
+    variables,
+  });
+
+export const updateBook = async variables =>
+  axios.post(API_URL, {
+    query: `
+      mutation ($id: ID!, $title: String!, $yearRead: String!) {
+        updateBook(id: $id, title: $title, yearRead: $yearRead) {
+          id
+          title
+          yearRead
+        }
+      }
+    `,
+    variables,
+  });
+
+export const deleteBook = async variables =>
+  axios.post(API_URL, {
+    query: `
+      mutation ($id: ID!) {
+        deleteBook(id: $id)
+      }
+    `,
+    variables,
+  });

@@ -1,4 +1,4 @@
-import { PubSub } from 'apollo-server';
+import { PubSub } from 'graphql-subscriptions';
 
 import * as BOOK_EVENTS from './book';
 
