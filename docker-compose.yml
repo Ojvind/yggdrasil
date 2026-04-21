@@ -12,6 +12,7 @@ services:
         environment:
             - SECRET=${SECRET}
             - REACT_APP_ENV=${REACT_APP_ENV:-dev}
+            - DEV_DATABASE_URL=mongodb://mongo:27017/writer-dev
     mongo:
         image: mongo
         ports:
