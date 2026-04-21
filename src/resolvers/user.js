@@ -56,16 +56,10 @@ export default {
     ) => {
       const user = await models.User.findByLogin(login);
 
-      if (!user) {
-        throw new GraphQLError('No user found with this login credentials.', {
-          extensions: { code: 'BAD_USER_INPUT' },
-        });
-      }
+      const isValid = user && (await user.validatePassword(password));
 
-      const isValid = await user.validatePassword(password);
-
-      if (!isValid) {
-        throw new GraphQLError('Invalid password.', {
+      if (!user || !isValid) {
+        throw new GraphQLError('Invalid login credentials.', {
           extensions: { code: 'UNAUTHENTICATED' },
         });
       }
