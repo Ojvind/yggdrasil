@@ -17,6 +17,7 @@ export default gql`
     signIn(login: String!, password: String!): Token!
     updateUser(username: String!): User!
     deleteUser(id: ID!): Boolean!
+    generateUploadUrl(filename: String!, contentType: String!): String!
   }
 
   type Token {

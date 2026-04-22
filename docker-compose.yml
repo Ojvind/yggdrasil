@@ -13,12 +13,45 @@ services:
             - SECRET=${SECRET}
             - REACT_APP_ENV=${REACT_APP_ENV:-dev}
             - DEV_DATABASE_URL=mongodb://mongo:27017/writer-dev
+            - MINIO_ENDPOINT=http://minio:9000
+            - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minioadmin}
+            - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioadmin}
+            - MINIO_BUCKET=${MINIO_BUCKET:-images}
     mongo:
         image: mongo
         ports:
             - 27017:27017
         volumes:
-            - mongodb:/data/db            
+            - mongodb:/data/db
+    minio:
+        image: minio/minio
+        ports:
+            - 9000:9000
+            - 9001:9001
+        volumes:
+            - minio:/data
+        environment:
+            - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minioadmin}
+            - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioadmin}
+        command: server /data --console-address ":9001"
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+    minio-init:
+        image: minio/mc
+        depends_on:
+            minio:
+                condition: service_healthy
+        entrypoint: >
+            /bin/sh -c "
+            mc alias set local http://minio:9000 $${MINIO_ROOT_USER:-minioadmin} $${MINIO_ROOT_PASSWORD:-minioadmin};
+            mc mb --ignore-existing local/images;
+            mc anonymous set public local/images;
+            exit 0;
+            "
 volumes:
     mongodb:
+    minio:
                
