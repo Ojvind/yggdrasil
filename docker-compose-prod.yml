@@ -5,18 +5,50 @@ services:
         restart: always
         build: .
         ports:
-            - 8000:8000
+            - 8001:8000
         command: sh -c "yarn install && yarn run start-prod-mongo-docker"
-        volumes:
-            - ./:/app
         environment:
             - SECRET=${SECRET}
+            - MINIO_PUBLIC_ENDPOINT=http://localhost:9002
+            - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minioadmin}
+            - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioadmin}
+            - MINIO_BUCKET=${MINIO_BUCKET:-images}
     mongo:
         image: mongo
         ports:
-            - 27017:27017
+            - 27018:27017
         volumes:
-            - mongodb:/data/db            
+            - mongodb:/data/db
+    minio:
+        image: minio/minio
+        ports:
+            - 9002:9000
+            - 9003:9001
+        volumes:
+            - minio:/data
+        environment:
+            - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minioadmin}
+            - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioadmin}
+            - MINIO_BROWSER_REDIRECT_URL=http://localhost:9003
+        command: server /data --console-address ":9001"
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+    minio-init:
+        image: minio/mc
+        depends_on:
+            minio:
+                condition: service_healthy
+        entrypoint: >
+            /bin/sh -c "
+            mc alias set local http://minio:9000 $${MINIO_ROOT_USER:-minioadmin} $${MINIO_ROOT_PASSWORD:-minioadmin};
+            mc mb --ignore-existing local/images;
+            mc anonymous set public local/images;
+            exit 0;
+            "
 volumes:
     mongodb:
+    minio:
                

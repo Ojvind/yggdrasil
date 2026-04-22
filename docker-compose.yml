@@ -13,7 +13,7 @@ services:
             - SECRET=${SECRET}
             - REACT_APP_ENV=${REACT_APP_ENV:-dev}
             - DEV_DATABASE_URL=mongodb://mongo:27017/writer-dev
-            - MINIO_ENDPOINT=http://minio:9000
+            - MINIO_PUBLIC_ENDPOINT=http://localhost:9000
             - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minioadmin}
             - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioadmin}
             - MINIO_BUCKET=${MINIO_BUCKET:-images}
@@ -33,6 +33,7 @@ services:
         environment:
             - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minioadmin}
             - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioadmin}
+            - MINIO_BROWSER_REDIRECT_URL=http://localhost:9001
         command: server /data --console-address ":9001"
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
