@@ -11,12 +11,12 @@ services:
             - ./:/app
         environment:
             - SECRET=${SECRET}
-            - REACT_APP_ENV=${REACT_APP_ENV:-dev}
+            - REACT_APP_ENV=dev
             - DEV_DATABASE_URL=mongodb://mongo:27017/writer-dev
             - MINIO_PUBLIC_ENDPOINT=http://localhost:9000
             - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minioadmin}
             - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioadmin}
-            - MINIO_BUCKET=${MINIO_BUCKET:-images}
+            - MINIO_BUCKET=images
     mongo:
         image: mongo
         ports:
@@ -55,4 +55,3 @@ services:
 volumes:
     mongodb:
     minio:
-               
