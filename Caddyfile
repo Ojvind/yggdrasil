@@ -1,0 +1,3 @@
+graphql.otterbjork.se {
+    reverse_proxy app:8000
+}

@@ -1,11 +1,23 @@
 version: "3.7"
 
 services:
+    caddy:
+        image: caddy:2-alpine
+        restart: always
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile
+            - caddy_data:/data
+            - caddy_config:/config
+        depends_on:
+            - app
     app:
         restart: always
         build: .
-        ports:
-            - 8001:8000
+        expose:
+            - 8000
         command: sh -c "yarn install && yarn run start-prod-mongo-docker"
         environment:
             - SECRET=${SECRET}
@@ -53,3 +65,5 @@ services:
 volumes:
     mongodb:
     minio:
+    caddy_data:
+    caddy_config:
