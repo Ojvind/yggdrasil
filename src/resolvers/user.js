@@ -40,13 +40,18 @@ export default {
   Mutation: {
     signUp: async (
       parent,
-      { username, email, password },
+      { username, email, password, adminSecret },
       { models, secret },
     ) => {
+      const role = adminSecret && adminSecret === process.env.ADMIN_SECRET
+        ? 'ADMIN'
+        : undefined;
+
       const user = await models.User.create({
         username,
         email,
         password,
+        role,
       });
 
       return { token: createToken(user, secret, '1m') };

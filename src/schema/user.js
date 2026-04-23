@@ -12,6 +12,7 @@ export default gql`
       username: String!
       email: String!
       password: String!
+      adminSecret: String
     ): Token!
 
     signIn(login: String!, password: String!): Token!
