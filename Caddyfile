@@ -1,3 +1,7 @@
 graphql.otterbjork.se {
     reverse_proxy app:8000
 }
+
+munin.images.otterbjork.se {
+    reverse_proxy minio:9000
+}

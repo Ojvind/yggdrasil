@@ -23,7 +23,7 @@ services:
             - SECRET=${SECRET}
             - REACT_APP_ENV=production
             - PROD_DATABASE_URL=mongodb://mongo:27017/writer-prod
-            - MINIO_PUBLIC_ENDPOINT=http://localhost:9002
+            - MINIO_PUBLIC_ENDPOINT=https://munin.images.otterbjork.se
             - MINIO_ROOT_USER=${MINIO_ROOT_USER}
             - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
             - MINIO_BUCKET=images
