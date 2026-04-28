@@ -13,11 +13,15 @@ services:
             - caddy_config:/config
         depends_on:
             - app
+
     app:
         restart: always
         build: .
         expose:
             - 8000
+        depends_on:
+            mongo:
+                condition: service_healthy
         command: sh -c "yarn install && yarn run start-prod-mongo-docker"
         environment:
             - SECRET=${SECRET}
@@ -27,12 +31,21 @@ services:
             - MINIO_ROOT_USER=${MINIO_ROOT_USER}
             - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
             - MINIO_BUCKET=images
+            - ADMIN_SECRET=${ADMIN_SECRET}
+
     mongo:
         image: mongo
         ports:
             - 27018:27017
         volumes:
             - mongodb:/data/db
+        healthcheck:
+            test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 10s
+
     minio:
         image: minio/minio
         ports:
@@ -50,6 +63,7 @@ services:
             interval: 5s
             timeout: 5s
             retries: 5
+
     minio-init:
         image: minio/mc
         depends_on:
@@ -65,6 +79,7 @@ services:
             mc anonymous set public local/images;
             exit 0;
             "
+
 volumes:
     mongodb:
     minio:
