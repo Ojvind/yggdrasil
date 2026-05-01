@@ -13,6 +13,7 @@ import schema from './schema';
 import resolvers from './resolvers';
 import models, { connectDb } from './models';
 import loaders from './loaders';
+import seed from './seed';
 
 if (!process.env.SECRET) {
   throw new Error('Missing required environment variable: SECRET');
@@ -84,7 +85,7 @@ connectDb().then(async () => {
   console.log('isDev', isDev);
   if (isDev) {
     console.log('------------------------------------');
-    console.log('Rensar Useeeeeeeers, Writers and Books samt skapar nya...');
+    console.log('Rensar Users, Writers and Books samt skapar nya...');
     console.log('------------------------------------');
     await Promise.all([
       models.User.deleteMany({}),
@@ -92,7 +93,7 @@ connectDb().then(async () => {
       models.Book.deleteMany({}),
     ]);
 
-    createInitData(new Date());
+    seed(models);
   }
 
   httpServer.listen({ port }, () => {
@@ -100,91 +101,3 @@ connectDb().then(async () => {
   });
 });
 
-const createInitData = async date => {
-  const user1 = new models.User({
-    username: 'öje',
-    email: 'ojvind.otterbjork@icloud.com',
-    password: 'öje',
-    role: 'ADMIN',
-  });
-
-  const user2 = new models.User({
-    username: 'user2',
-    email: 'user2@user.se',
-    password: 'user2',
-  });
-
-  const writer1 = new models.Writer({
-    name: 'Tim',
-    surname: 'Ferris',
-    homepage: 'https://tim.blog/',
-    nationality: 'US',
-    createdAt: date.setSeconds(date.getSeconds() + 1),
-  });
-
-  const writer2 = new models.Writer({
-    name: 'Greg',
-    surname: 'McKeown',
-    homepage: 'https://gregmckeown.com/',
-    nationality: 'GB',
-    createdAt: date.setSeconds(date.getSeconds() + 1),
-  });
-
-  const writer3 = new models.Writer({
-    name: 'Lars',
-    surname: 'Kepler',
-    homepage: 'http://larskepler.com/',
-    nationality: 'SE',
-    createdAt: date.setSeconds(date.getSeconds() + 1),
-  });
-
-  const book1 = new models.Book({
-    title: 'The 4-Hour Bodyyyyyyy',
-    url: 'https://fourhourbody.com/',
-    yearPublished: '2010',
-    yearRead: '2017',
-    description: 'What ever...',
-    createdAt: date.setSeconds(date.getSeconds() + 1),
-    writerId: writer1.id,
-  });
-
-  const book2 = new models.Book({
-    title: 'The 4-Hour Workweek',
-    url: 'https://fourhourworkweek.com/',
-    yearPublished: '2007',
-    yearRead: '2016',
-    description: 'What ever...igen!',
-    createdAt: date.setSeconds(date.getSeconds() + 1),
-    writerId: writer1.id,
-  });
-
-  const book3 = new models.Book({
-    title: 'Essentialism: The Disciplined Pursuit of Less',
-    url: 'https://gregmckeown.com/books/essentialism/',
-    yearPublished: '2014',
-    yearRead: '2019',
-    description: 'What ever...ännu en gång',
-    createdAt: date.setSeconds(date.getSeconds() + 1),
-    writerId: writer2.id,
-  });
-
-  const book4 = new models.Book({
-    title: 'LAZARUS',
-    url: 'https://larskepler.com/books/lazarus/',
-    yearPublished: '2019',
-    yearRead: '2019',
-    description: 'What ever...one last time (?)',
-    createdAt: date.setSeconds(date.getSeconds() + 1),
-    writerId: writer3.id,
-  });
-
-  user1.save();
-  user2.save();
-  writer1.save();
-  writer2.save();
-  writer3.save();
-  book1.save();
-  book2.save();
-  book3.save();
-  book4.save();
-};
