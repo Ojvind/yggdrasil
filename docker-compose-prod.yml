@@ -26,7 +26,7 @@ services:
         environment:
             - SECRET=${SECRET}
             - REACT_APP_ENV=production
-            - PROD_DATABASE_URL=mongodb://mongo:27017/writer-prod
+            - PROD_DATABASE_URL=mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongo:27017/writer-prod?authSource=admin
             - MINIO_PUBLIC_ENDPOINT=https://munin.images.otterbjork.se
             - MINIO_ROOT_USER=${MINIO_ROOT_USER}
             - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
@@ -35,6 +35,9 @@ services:
 
     mongo:
         image: mongo
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
         volumes:
             - mongodb:/data/db
         healthcheck:
