@@ -65,7 +65,10 @@ for (const { title, name, surname, url, yearRead } of data) {
 
   const existing = db.books.findOne({ title });
   if (existing) {
-    print(`  Hoppar över (finns redan): ${title}`);
+    const update = { $set: { yearRead, writerId: writer._id, updatedAt: new Date() } };
+    if (url) update.$set.url = url;
+    db.books.updateOne({ title }, update);
+    print(`  Uppdaterad: ${title} → yearRead: ${yearRead}`);
     skipped++;
   } else {
     const book = { title, writerId: writer._id, yearRead, createdAt: new Date(), updatedAt: new Date() };
