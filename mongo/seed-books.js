@@ -4,50 +4,57 @@
 //   < mongo/seed-books.js
 
 const data = [
-  { title: 'Silvervägen',                                  name: 'Stina',        surname: 'Jackson' },
-  { title: 'Ek',                                           name: 'Frida',        surname: 'Andersson Johansson' },
-  { title: 'Dränkt',                                       name: 'Frida',        surname: 'Andersson Johansson' },
-  { title: 'Hemmet',                                       name: 'Mats',         surname: 'Strandberg' },
-  { title: 'Konferensen',                                  name: 'Mats',         surname: 'Strandberg' },
-  { title: 'Kastanjemannen',                               name: 'Søren',        surname: 'Sveistrup' },
-  { title: 'En familjetragedi',                            name: 'Mattias',      surname: 'Edvardsson' },
-  { title: 'Lova mig tystnad',                             name: 'Mattias',      surname: 'Edvardsson' },
-  { title: 'Runor: historia, tydning, tolkning',           name: 'Lars Magnar',  surname: 'Enoksen' },
-  { title: 'Runor: mästarens handbok',                     name: 'Lars Magnar',  surname: 'Enoksen' },
-  { title: 'Djur och natur i fornnordisk mytologi',        name: 'Lars Magnar',  surname: 'Enoksen' },
-  { title: 'Döden går på visning',                         name: 'Anders',       surname: 'de la Motte' },
-  { title: 'Ingen kvinnas land',                           name: 'Katerina',     surname: 'Janouch' },
-  { title: 'Benvittring',                                  name: 'Johan',        surname: 'Theorin' },
-  { title: 'Energikoderna',                                name: 'Sue',          surname: 'Morter' },
-  { title: 'The 5 Languages of Appreciation in the Workplace', name: 'Gary D',  surname: 'Chapman' },
-  { title: 'Rotvälta',                                     name: 'Tove',         surname: 'Alsterdal' },
-  { title: 'Slukhål',                                      name: 'Tove',         surname: 'Alsterdal' },
-  { title: 'Lönsamt ledarskap',                            name: 'Hans',         surname: 'Blank',          url: 'https://mercuri.se/insights/lonsamt-ledarskap/' },
-  { title: 'Senare',                                       name: 'Stephen',      surname: 'King' },
-  { title: 'Rovhjärta',                                    name: 'Ulrika',       surname: 'Rolfsdotter' },
-  { title: 'Syndabarn',                                    name: 'Ulrika',       surname: 'Rolfsdotter' },
-  { title: 'Spindeln',                                     name: 'Lars',         surname: 'Kepler' },
-  { title: 'Glaskroppar: Svart melankoli',                 name: 'Erik Axl',     surname: 'Sund' },
-  { title: 'Dockliv: Grå melankoli',                       name: 'Erik Axl',     surname: 'Sund' },
-  { title: 'Otid: Vit melankoli',                          name: 'Erik Axl',     surname: 'Sund' },
-  { title: 'Skriften i vattnet',                           name: 'John Ajvide',  surname: 'Lindqvist' },
-  { title: 'Rummet i jorden',                               name: 'John Ajvide',  surname: 'Lindqvist' },
-  { title: 'Verkligheten',                                 name: 'John Ajvide',  surname: 'Lindqvist' },
-  { title: 'Speciella omständigheter',                     name: 'John Ajvide',  surname: 'Lindqvist' },
-  { title: 'Assistenten',                                  name: 'S.K.',         surname: 'Tremayne' },
-  { title: 'Accelerate',                                   name: 'Nicole',       surname: 'Forsgren' },
-  { title: 'Ödet och hoppet',                              name: 'Niklas',       surname: 'Natt och Dag' },
-  { title: 'Jag kommer att hitta nyckeln',                 name: 'Alex',         surname: 'Ahndoril' },
-  { title: 'Handbok i livets konst',                       name: 'Epiktetos',    surname: 'Epiktetos' },
-  { title: 'Snorres edda & den poetiska eddan',            name: 'Snorre',       surname: 'Sturlason' },
-  { title: 'Buffésex',                                     name: 'Marika',       surname: 'Smith' },
+  // 2021
+  { title: 'Silvervägen',                                       yearRead: '2021', name: 'Stina',        surname: 'Jackson' },
+  { title: 'Ek',                                                yearRead: '2021', name: 'Frida',        surname: 'Andersson Johansson' },
+  { title: 'Hemmet',                                            yearRead: '2021', name: 'Mats',         surname: 'Strandberg' },
+
+  // 2022
+  { title: 'Kastanjemannen',                                    yearRead: '2022', name: 'Søren',        surname: 'Sveistrup' },
+  { title: 'En familjetragedi',                                 yearRead: '2022', name: 'Mattias',      surname: 'Edvardsson' },
+  { title: 'Runor: historia, tydning, tolkning',                yearRead: '2022', name: 'Lars Magnar',  surname: 'Enoksen' },
+  { title: 'Döden går på visning',                              yearRead: '2022', name: 'Anders',       surname: 'de la Motte' },
+  { title: 'Ingen kvinnas land',                                yearRead: '2022', name: 'Katerina',     surname: 'Janouch' },
+  { title: 'Benvittring',                                       yearRead: '2022', name: 'Johan',        surname: 'Theorin' },
+  { title: 'Konferensen',                                       yearRead: '2022', name: 'Mats',         surname: 'Strandberg' },
+  { title: 'Dränkt',                                            yearRead: '2022', name: 'Frida',        surname: 'Andersson Johansson' },
+  { title: 'Energikoderna',                                     yearRead: '2022', name: 'Sue',          surname: 'Morter' },
+  { title: 'The 5 Languages of Appreciation in the Workplace', yearRead: '2022', name: 'Gary D',       surname: 'Chapman' },
+  { title: 'Rotvälta',                                          yearRead: '2022', name: 'Tove',         surname: 'Alsterdal' },
+
+  // 2023
+  { title: 'Slukhål',                                          yearRead: '2023', name: 'Tove',         surname: 'Alsterdal' },
+  { title: 'Lönsamt ledarskap',                                yearRead: '2023', name: 'Hans',         surname: 'Blank',         url: 'https://mercuri.se/insights/lonsamt-ledarskap/' },
+  { title: 'Senare',                                           yearRead: '2023', name: 'Stephen',      surname: 'King' },
+  { title: 'Rovhjärta',                                        yearRead: '2023', name: 'Ulrika',       surname: 'Rolfsdotter' },
+  { title: 'Runor: mästarens handbok',                         yearRead: '2023', name: 'Lars Magnar',  surname: 'Enoksen' },
+  { title: 'Spindeln',                                         yearRead: '2023', name: 'Lars',         surname: 'Kepler' },
+  { title: 'Syndabarn',                                        yearRead: '2023', name: 'Ulrika',       surname: 'Rolfsdotter' },
+  { title: 'Lova mig tystnad',                                 yearRead: '2023', name: 'Mattias',      surname: 'Edvardsson' },
+  { title: 'Djur och natur i fornnordisk mytologi',            yearRead: '2023', name: 'Lars Magnar',  surname: 'Enoksen' },
+  { title: 'Glaskroppar: Svart melankoli',                     yearRead: '2023', name: 'Erik Axl',     surname: 'Sund' },
+  { title: 'Skriften i vattnet',                               yearRead: '2023', name: 'John Ajvide',  surname: 'Lindqvist' },
+  { title: 'Dockliv: Grå melankoli',                           yearRead: '2023', name: 'Erik Axl',     surname: 'Sund' },
+  { title: 'Otid: Vit melankoli',                              yearRead: '2023', name: 'Erik Axl',     surname: 'Sund' },
+
+  // 2024
+  { title: 'Assistenten',                                      yearRead: '2024', name: 'S.K.',         surname: 'Tremayne' },
+  { title: 'Accelerate',                                       yearRead: '2024', name: 'Nicole',       surname: 'Forsgren' },
+  { title: 'Rummet i jorden',                                  yearRead: '2024', name: 'John Ajvide',  surname: 'Lindqvist' },
+  { title: 'Ödet och hoppet',                                  yearRead: '2024', name: 'Niklas',       surname: 'Natt och Dag' },
+  { title: 'Jag kommer att hitta nyckeln',                     yearRead: '2024', name: 'Alex',         surname: 'Ahndoril' },
+  { title: 'Handbok i livets konst',                           yearRead: '2024', name: 'Epiktetos',    surname: 'Epiktetos' },
+  { title: 'Snorres edda & den poetiska eddan',                yearRead: '2024', name: 'Snorre',       surname: 'Sturlason' },
+  { title: 'Buffésex',                                         yearRead: '2024', name: 'Marika',       surname: 'Smith' },
+  { title: 'Verkligheten',                                     yearRead: '2024', name: 'John Ajvide',  surname: 'Lindqvist' },
+  { title: 'Speciella omständigheter',                         yearRead: '2024', name: 'John Ajvide',  surname: 'Lindqvist' },
 ];
 
 let writersCreated = 0;
 let booksCreated = 0;
 let skipped = 0;
 
-for (const { title, name, surname, url } of data) {
+for (const { title, name, surname, url, yearRead } of data) {
   let writer = db.writers.findOne({ name, surname });
   if (!writer) {
     db.writers.insertOne({ name, surname, createdAt: new Date(), updatedAt: new Date() });
@@ -61,7 +68,7 @@ for (const { title, name, surname, url } of data) {
     print(`  Hoppar över (finns redan): ${title}`);
     skipped++;
   } else {
-    const book = { title, writerId: writer._id, yearRead: '2025', createdAt: new Date(), updatedAt: new Date() };
+    const book = { title, writerId: writer._id, yearRead, createdAt: new Date(), updatedAt: new Date() };
     if (url) book.url = url;
     db.books.insertOne(book);
     print(`  Ny bok: ${title}`);
