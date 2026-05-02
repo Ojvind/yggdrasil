@@ -33,21 +33,21 @@ const data = [
   { title: 'Lova mig tystnad',                                 yearRead: '2023', name: 'Mattias',      surname: 'Edvardsson' },
   { title: 'Djur och natur i fornnordisk mytologi',            yearRead: '2023', name: 'Lars Magnar',  surname: 'Enoksen' },
   { title: 'Glaskroppar: Svart melankoli',                     yearRead: '2023', name: 'Erik Axl',     surname: 'Sund' },
-  { title: 'Skriften i vattnet',                               yearRead: '2023', name: 'John Ajvide',  surname: 'Lindqvist' },
+  { title: 'Skriften i vattnet',                               yearRead: '2023', name: 'John',         surname: 'Ajvide Lindqvist' },
   { title: 'Dockliv: Grå melankoli',                           yearRead: '2023', name: 'Erik Axl',     surname: 'Sund' },
   { title: 'Otid: Vit melankoli',                              yearRead: '2023', name: 'Erik Axl',     surname: 'Sund' },
 
   // 2024
   { title: 'Assistenten',                                      yearRead: '2024', name: 'S.K.',         surname: 'Tremayne' },
   { title: 'Accelerate',                                       yearRead: '2024', name: 'Nicole',       surname: 'Forsgren' },
-  { title: 'Rummet i jorden',                                  yearRead: '2024', name: 'John Ajvide',  surname: 'Lindqvist' },
+  { title: 'Rummet i jorden',                                  yearRead: '2024', name: 'John',         surname: 'Ajvide Lindqvist' },
   { title: 'Ödet och hoppet',                                  yearRead: '2024', name: 'Niklas',       surname: 'Natt och Dag' },
   { title: 'Jag kommer att hitta nyckeln',                     yearRead: '2024', name: 'Alex',         surname: 'Ahndoril' },
   { title: 'Handbok i livets konst',                           yearRead: '2024', name: 'Epiktetos',    surname: 'Epiktetos' },
   { title: 'Snorres edda & den poetiska eddan',                yearRead: '2024', name: 'Snorre',       surname: 'Sturlason' },
   { title: 'Buffésex',                                         yearRead: '2024', name: 'Marika',       surname: 'Smith' },
-  { title: 'Verkligheten',                                     yearRead: '2024', name: 'John Ajvide',  surname: 'Lindqvist' },
-  { title: 'Speciella omständigheter',                         yearRead: '2024', name: 'John Ajvide',  surname: 'Lindqvist' },
+  { title: 'Verkligheten',                                     yearRead: '2024', name: 'John',         surname: 'Ajvide Lindqvist' },
+  { title: 'Speciella omständigheter',                         yearRead: '2024', name: 'John',         surname: 'Ajvide Lindqvist' },
 ];
 
 let writersCreated = 0;
