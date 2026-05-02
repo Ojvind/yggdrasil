@@ -36,7 +36,7 @@ const data = [
   { title: 'Speciella omständigheter',                     name: 'John Ajvide',  surname: 'Lindqvist' },
   { title: 'Assistenten',                                  name: 'S.K.',         surname: 'Tremayne' },
   { title: 'Accelerate',                                   name: 'Nicole',       surname: 'Forsgren' },
-  { title: 'Ödet och hoppet',                              name: 'Natt',         surname: 'och Dag' },
+  { title: 'Ödet och hoppet',                              name: 'Niklas',       surname: 'Natt och Dag' },
   { title: 'Jag kommer att hitta nyckeln',                 name: 'Alex',         surname: 'Ahndoril' },
   { title: 'Handbok i livets konst',                       name: 'Epiktetos',    surname: 'Epiktetos' },
   { title: 'Snorres edda & den poetiska eddan',            name: 'Snorre',       surname: 'Sturlason' },
