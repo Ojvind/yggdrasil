@@ -62,72 +62,26 @@ export default {
   Mutation: {
     createWriter: combineResolvers(
       isAuthenticated,
-      async(_parent, { name, surname, homepage, portraitimageurl, nationality }, { models }) => {
+      async(_parent, { name, surname, homepage, portraitimageurl, nationality, description }, { models }) => {
         return await models.Writer.create(
-          { name, surname, homepage, portraitimageurl, nationality },
+          { name, surname, homepage, portraitimageurl, nationality, description },
         );
       },
     ),
 
     updateWriter: combineResolvers(
       isAuthenticated,
-      async (_parent, { id, name, surname, homepage, portraitimageurl, nationality }, { models }) => {
-        let props = {};
-        if (homepage && portraitimageurl && nationality) {
-          props = {
-            name,
-            surname,
-            homepage,
-            portraitimageurl,
-            nationality,
-          }
-        } else if (homepage && !portraitimageurl && !nationality) {
-          props = {
-            name,
-            surname,
-            homepage,
-          }
-        } else if (!homepage && portraitimageurl && !nationality) {
-          props = {
-            name,
-            surname,
-            portraitimageurl,
-          }
-        } else if (!homepage && !portraitimageurl && nationality) {
-          props = {
-            name,
-            surname,
-            nationality,
-          }
-        } else if (homepage && portraitimageurl && !nationality) {
-          props = {
-            name,
-            surname,
-            homepage,
-            portraitimageurl,
-          }
-        } else if (homepage && !portraitimageurl && nationality) {
-          props = {
-            name,
-            surname,
-            homepage,
-            nationality,
-          }
-        } else if (!homepage && portraitimageurl && nationality) {
-          props = {
-            name,
-            surname,
-            portraitimageurl,
-            nationality,
-          }
-        }
-      return await models.Writer.findByIdAndUpdate(
+      async (_parent, { id, name, surname, homepage, portraitimageurl, nationality, description }, { models }) => {
+        const props = { name, surname };
+        if (homepage) props.homepage = homepage;
+        if (portraitimageurl) props.portraitimageurl = portraitimageurl;
+        if (nationality) props.nationality = nationality;
+        if (description) props.description = description;
+
+        return await models.Writer.findByIdAndUpdate(
           id,
           props,
-          {
-            new: true,
-            runValidators: true,
-          },
+          { new: true, runValidators: true },
         );
       },
     ),

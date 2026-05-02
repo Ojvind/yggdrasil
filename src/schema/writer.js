@@ -12,16 +12,18 @@ export default gql`
       surname: String!,
       homepage: String,
       portraitimageurl: String,
-      nationality: String
+      nationality: String,
+      description: String
     ): Writer!
 
     updateWriter(
-      id: ID!, 
-      name: String!, 
-      surname: String!, 
+      id: ID!,
+      name: String!,
+      surname: String!,
       homepage: String,
       portraitimageurl: String,
-      nationality: String
+      nationality: String,
+      description: String
     ): Writer!
     
     deleteWriter(id: ID!): Boolean!
@@ -39,6 +41,7 @@ export default gql`
     homepage: String
     portraitimageurl: String
     nationality: String
+    description: String
     books: [Book!]
   }
 `;
