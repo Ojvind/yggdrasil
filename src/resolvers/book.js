@@ -69,7 +69,7 @@ export default {
         const filterOnWriter = writerId
           ? {
               ...cursorOptions,
-              writerId: writerId.toObjectId(),
+              writerIds: writerId.toObjectId(),
             }
           : {
             ...cursorOptions
@@ -119,9 +119,9 @@ export default {
   Mutation: {
     createBook: combineResolvers(
       isAuthenticated,
-      async (_parent, {writerId, title, url, yearPublished, yearRead, description, portraitimageurl}, { models }) => {
+      async (_parent, {writerIds, title, url, yearPublished, yearRead, description, portraitimageurl}, { models }) => {
         const book = await models.Book.create({
-          writerId,
+          writerIds,
           title,
           url,
           yearPublished,
@@ -136,8 +136,9 @@ export default {
 
     updateBook: combineResolvers(
       isAuthenticated,
-      async (_parent, {id, title, url, yearPublished, yearRead, description, portraitimageurl}, { models }) => {
+      async (_parent, {id, writerIds, title, url, yearPublished, yearRead, description, portraitimageurl}, { models }) => {
         let props = {
+          ...(writerIds !== undefined && { writerIds }),
           title,
           url,
           yearPublished,
@@ -172,8 +173,8 @@ export default {
   },
 
   Book: {
-    writer: async (book, _args, { loaders }) => {
-      return await loaders.writer.load(book.writerId);
+    writers: async (book, _args, { loaders }) => {
+      return await Promise.all((book.writerIds || []).map(id => loaders.writer.load(id)));
     },
   },
 };

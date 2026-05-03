@@ -33,9 +33,9 @@ const bookSchema = new mongoose.Schema({
         unique: false,
         required: false,
       },  
-      writerId: {
-        type: mongoose.Schema.Types.ObjectId
-      },
+      writerIds: [{
+        type: mongoose.Schema.Types.ObjectId,
+      }],
     },
     {
         timestamps: true,

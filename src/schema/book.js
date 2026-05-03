@@ -9,7 +9,7 @@ export default gql`
   
   extend type Mutation {
     createBook(
-      writerId: ID!,
+      writerIds: [ID!]!,
       title: String!,
       url: String,
       yearPublished: String,
@@ -20,6 +20,7 @@ export default gql`
 
     updateBook(
       id: ID!,
+      writerIds: [ID!],
       title: String!,
       url: String,
       yearPublished: String,
@@ -52,7 +53,7 @@ export default gql`
     description: String
     portraitimageurl: String
     createdAt: Date!
-    writer: Writer!
+    writers: [Writer!]!
   }
 `;
 
