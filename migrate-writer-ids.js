@@ -1,14 +1,4 @@
-/**
- * Migration: writerId -> writerIds
- *
- * For each Book that has a legacy `writerId` field, copy it into the
- * `writerIds` array and remove the old field.
- *
- * Run with: node migrate-writer-ids.js
- * (requires MONGODB_URI or DATABASE_URL env var, same as the main app)
- */
-
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const MONGO_URL =
   process.env.DATABASE_URL ||
