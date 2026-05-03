@@ -5,7 +5,7 @@ const writerSchema = new mongoose.Schema({
     name: {
       type: String,
       unique: false,
-      required: true,
+      required: false,
     },
     surname: {
       type: String,
