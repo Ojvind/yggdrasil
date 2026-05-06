@@ -65,13 +65,13 @@ for (const { title, name, surname, url, yearRead } of data) {
 
   const existing = db.books.findOne({ title });
   if (existing) {
-    const update = { $set: { yearRead, writerId: writer._id, updatedAt: new Date() } };
+    const update = { $set: { yearRead, writerIds: [writer._id], updatedAt: new Date() } };
     if (url) update.$set.url = url;
     db.books.updateOne({ title }, update);
     print(`  Uppdaterad: ${title} → yearRead: ${yearRead}`);
     skipped++;
   } else {
-    const book = { title, writerId: writer._id, yearRead, createdAt: new Date(), updatedAt: new Date() };
+    const book = { title, writerIds: [writer._id], yearRead, createdAt: new Date(), updatedAt: new Date() };
     if (url) book.url = url;
     db.books.insertOne(book);
     print(`  Ny bok: ${title}`);

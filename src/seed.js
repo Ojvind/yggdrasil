@@ -188,7 +188,7 @@ const seed = async models => {
     const writer = new models.Writer({ ...writerFields, createdAt: nextDate() });
     await writer.save();
     for (const bookData of books) {
-      await new models.Book({ ...bookData, description: '', createdAt: nextDate(), writerId: writer.id }).save();
+      await new models.Book({ ...bookData, description: '', createdAt: nextDate(), writerIds: [writer.id] }).save();
     }
   }
 };

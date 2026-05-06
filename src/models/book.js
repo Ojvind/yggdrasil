@@ -21,7 +21,7 @@ const bookSchema = new mongoose.Schema({
       yearRead: {
         type: String,
         unique: false,
-        required: true,
+        required: false,
       },
       description: {
         type: String,
@@ -32,7 +32,11 @@ const bookSchema = new mongoose.Schema({
         type: String,
         unique: false,
         required: false,
-      },  
+      },
+      wantToRead: {
+        type: Boolean,
+        default: false,
+      },
       writerIds: [{
         type: mongoose.Schema.Types.ObjectId,
       }],

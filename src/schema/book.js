@@ -13,9 +13,10 @@ export default gql`
       title: String!,
       url: String,
       yearPublished: String,
-      yearRead: String!,
+      yearRead: String,
       description: String,
-      portraitimageurl: String
+      portraitimageurl: String,
+      wantToRead: Boolean
     ): Book!
 
     updateBook(
@@ -24,9 +25,10 @@ export default gql`
       title: String!,
       url: String,
       yearPublished: String,
-      yearRead: String!,
+      yearRead: String,
       description: String,
       portraitimageurl: String,
+      wantToRead: Boolean
     ): Book!
 
     deleteBook(
@@ -49,9 +51,10 @@ export default gql`
     title: String!
     url: String
     yearPublished: String
-    yearRead: String!
+    yearRead: String
     description: String
     portraitimageurl: String
+    wantToRead: Boolean
     createdAt: Date!
     writers: [Writer!]!
   }
