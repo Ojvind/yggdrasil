@@ -76,6 +76,22 @@ Database URL selection in `src/index.js` is based on the `REACT_APP_ENV` env var
 
 ### Production Deployment
 
-Caddy reverse proxy handles HTTPS:
+Runs on a Hetzner server. The entire stack (app + MongoDB + MinIO + Caddy) is defined in `docker-compose-prod.yml`; Caddy reverse proxy handles HTTPS with automatic Let's Encrypt certificates:
 - `graphql.otterbjork.se` → app:8000
 - `munin.images.otterbjork.se` → minio:9000
+
+One-time server setup:
+1. Install Docker (with the compose plugin) and `make`
+2. Point DNS A records for both domains at the server IP
+3. Open ports 80 and 443 in the firewall
+4. Clone the repo and create a `.env` in the repo root with `SECRET`, `ADMIN_SECRET`, `MONGO_USER`, `MONGO_PASSWORD`, `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD`
+5. Run `make prod-up` (the `minio-init` container creates the images bucket automatically)
+
+Deploying an update — the app code is copied into the image at build time (no source volume mount in prod), so `git pull` alone is not enough:
+
+```bash
+git pull
+docker compose -f docker-compose-prod.yml up -d --build app
+```
+
+MongoDB, MinIO, and Caddy data persist in named Docker volumes (`mongodb`, `minio`, `caddy_data`, `caddy_config`) and survive restarts.
