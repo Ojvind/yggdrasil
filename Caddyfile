@@ -9,3 +9,7 @@ munin.images.otterbjork.se {
 api.mairutveckling.se {
     reverse_proxy mair-api:4000
 }
+
+api.idun.otterbjork.se {
+    reverse_proxy idun-api:4100
+}
